@@ -1,55 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <!-- Definição do tipo de documento e idioma da página -->
+    <!-- Declaração do tipo de documento e definição do idioma da página -->
     <meta charset="UTF-8">
-    <!-- Configuração da página para ser responsiva, ajustando para a largura do dispositivo -->
+    <!-- Configuração para responsividade, ajustando o layout para a largura da tela do dispositivo -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Título da página -->
+    <!-- Título que será exibido na aba do navegador -->
     <title>Atividades Dropdown</title>
-    <!-- Link para o arquivo de estilo CSS externo -->
+    <!-- Inclusão do arquivo de estilos externo (CSS) -->
     <link rel="stylesheet" href="styles.css">
-    <!-- Link para a fonte do Google Fonts -->
+    <!-- Importação da fonte 'Poppins' do Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Container principal que envolve todo o conteúdo da página -->
     <main class="container">
         <!-- Título principal da página -->
         <h1>Seleção de Atividades</h1>
 
-        <!-- Container que irá abrigar as atividades dinâmicas -->
+        <!-- Seção onde as atividades serão adicionadas dinamicamente via JavaScript -->
         <section id="activitiesContainer">
-            <!-- Removido o grupo de atividade inicial para evitar duplicação -->
+            <!-- Conteúdo será inserido pelo JavaScript -->
         </section>
 
         <!-- Botão para adicionar uma nova atividade -->
         <button id="addActivityBtn" aria-label="Adicionar Atividade">
+            <!-- Ícone SVG representando o botão de adição -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
             </svg>
         </button>
 
-        <!-- Exibição da produtividade total -->
+        <!-- Seção que exibe a pontuação total de produtividade -->
         <section id="totalPontuacaoContainer">
             <h2>Produtividade: <span id="totalPontuacao">0,00</span></h2>
         </section>
 
-        <!-- Botões para gerar e carregar JSON -->
+        <!-- Botões para gerar e carregar dados no formato JSON -->
         <div class="json-buttons">
             <button id="gerarJsonBtn">Gerar JSON das Atividades</button>
             <button id="carregarJsonBtn">Carregar JSON das Atividades</button>
         </div>
 
-        <!-- Campo onde o JSON será exibido -->
+        <!-- Área onde o JSON gerado será exibido -->
         <pre id="jsonOutput" aria-live="polite"></pre>
 
-        <!-- Botão para salvar o JSON em um arquivo -->
+        <!-- Botão oculto para salvar o arquivo JSON -->
         <button id="salvarJsonBtn" style="display: none;">Salvar Arquivo JSON</button>
 
-        <!-- Campo de input oculto para carregar arquivos -->
+        <!-- Input oculto para carregar arquivos JSON -->
         <input type="file" id="fileInput" accept=".json" style="display: none;" />
 
-        <!-- Script que contém as funcionalidades da página -->
+        <!-- Inclusão do arquivo JavaScript responsável pela lógica da página -->
         <script src="script.js" defer></script>
     </main>
 </body>

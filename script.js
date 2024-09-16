@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Elementos do DOM relacionados a atividades e JSON
     const activitiesContainer = document.getElementById('activitiesContainer');
     const addActivityBtn = document.getElementById('addActivityBtn');
     const gerarJsonBtn = document.getElementById('gerarJsonBtn');
@@ -8,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('fileInput');
     const totalPontuacaoEl = document.getElementById('totalPontuacao');
 
-    let atividadesData = [];
-    let resultadoJSON = {};
+    let atividadesData = []; // Dados de atividades carregados do XML
+    let resultadoJSON = {}; // Armazenamento temporário do JSON gerado
 
     // Formatação de números usando Intl
     const formatNumber = new Intl.NumberFormat('pt-BR', {
@@ -27,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const xmlDoc = parser.parseFromString(text, "application/xml");
             const atividades = xmlDoc.getElementsByTagName('atividade');
 
+            // Mapeamento dos dados do XML para o array atividadesData
             atividadesData = Array.from(atividades).map(atividade => ({
                 nome: atividade.querySelector('nome').textContent,
                 dataValue: atividade.querySelector('data-value').textContent,
@@ -39,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Formatar entrada numérica
+    // Função para formatar entrada numérica no campo de pontuação
     function formatarEntradaNumerica(campo) {
         const previousValue = campo.dataset.previousValue || '';
         const currentValue = campo.value;
@@ -64,12 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
         atualizarPontuacaoTotal();
     }
 
-    // Adicionar nova atividade
+    // Adicionar nova atividade dinamicamente
     function adicionarNovaAtividade(selectedActivityValue = null, pontuacaoRealizada = '') {
         const activityGroup = document.createElement('div');
         activityGroup.classList.add('activity-group');
 
-        // Criar Input Group
+        // Criar Input Group (Grupo de Inputs)
         const inputGroup = document.createElement('div');
         inputGroup.classList.add('input-group');
 
@@ -84,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         selectAtividade.setAttribute('id', uniqueIdAtividade);
         selectAtividade.setAttribute('aria-label', 'Selecione uma atividade');
 
-        // Preencher opções
+        // Preencher opções no select com as atividades disponíveis
         atividadesData.forEach(atividade => {
             const option = document.createElement('option');
             option.value = atividade.dataValue;
@@ -92,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
             selectAtividade.appendChild(option);
         });
 
+        // Selecionar valor inicial, se fornecido
         if (selectedActivityValue) {
             selectAtividade.value = selectedActivityValue;
         }
@@ -111,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         inputPontuacao.setAttribute('data-previous-value', pontuacaoRealizada);
         inputPontuacao.addEventListener('input', (e) => formatarEntradaNumerica(e.target));
 
-        // Append elementos ao inputGroup
+        // Inserir elementos no inputGroup
         inputGroup.appendChild(labelAtividade);
         inputGroup.appendChild(selectAtividade);
         inputGroup.appendChild(labelPontuacao);
@@ -136,17 +139,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         buttonGroup.appendChild(removeBtn);
 
-        // Append inputGroup e buttonGroup ao activityGroup
+        // Inserir inputGroup e buttonGroup no activityGroup
         activityGroup.appendChild(inputGroup);
         activityGroup.appendChild(buttonGroup);
 
-        // Append activityGroup ao activitiesContainer
+        // Inserir activityGroup no activitiesContainer
         activitiesContainer.appendChild(activityGroup);
 
+        // Atualizar pontuação total
         atualizarPontuacaoTotal();
     }
 
-    // Atualizar pontuação total
+    // Atualizar pontuação total de produtividade
     function atualizarPontuacaoTotal() {
         const activityGroups = document.querySelectorAll('.activity-group');
         let totalPontuacao = 0;
@@ -165,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
         totalPontuacaoEl.textContent = formatNumber.format(totalPontuacao);
     }
 
-    // Gerar JSON
+    // Gerar JSON com as atividades e pontuações realizadas
     function gerarJSON() {
         const activityGroups = document.querySelectorAll('.activity-group');
         const atividadesArray = [];
@@ -199,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // Exibir o JSON gerado na página
         resultadoJSON = { atividades: atividadesArray };
         jsonOutput.style.display = 'block';
         jsonOutput.textContent = JSON.stringify(resultadoJSON, null, 4);
@@ -241,12 +246,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Inicializar
+    // Inicializar funções e carregar atividades
     async function init() {
         await carregarAtividadesXML();
         adicionarNovaAtividade(); // Adiciona o primeiro grupo de atividade
 
-        // Eventos
+        // Eventos de interação do usuário
         addActivityBtn.addEventListener('click', () => adicionarNovaAtividade());
         gerarJsonBtn.addEventListener('click', gerarJSON);
         salvarJsonBtn.addEventListener('click', salvarArquivoJSON);
@@ -254,5 +259,5 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInput.addEventListener('change', carregarArquivoJSON);
     }
 
-    init();
+    init(); // Chamada inicial para iniciar a aplicação
 });

@@ -1,4 +1,4 @@
-/* Variáveis de Cores */
+/* Definição de variáveis globais para cores e estilos */
 :root {
     --background-color: #f4f4f9;
     --container-max-width: 1200px;
@@ -14,7 +14,7 @@
     --header-font: 'Poppins', sans-serif;
 }
 
-/* Estilo básico aplicado ao corpo da página */
+/* Estilos globais aplicados ao corpo da página */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -22,7 +22,7 @@ body {
     background-color: var(--background-color);
 }
 
-/* Definição do container principal da página */
+/* Container principal que envolve o conteúdo da página */
 .container {
     width: 90%;
     max-width: var(--container-max-width);
@@ -30,7 +30,7 @@ body {
     padding: 10px;
 }
 
-/* Estilos aplicados ao título principal (h1) */
+/* Estilização do título principal da página */
 h1 {
     font-family: var(--header-font);
     text-align: center;
@@ -45,6 +45,7 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Linha decorativa abaixo do título */
 h1::after {
     content: '';
     display: block;
@@ -55,13 +56,14 @@ h1::after {
     border-radius: 2px;
 }
 
+/* Animação de fade-in para o título */
 @keyframes fadeIn {
     to {
         opacity: 1;
     }
 }
 
-/* Estilos para os rótulos (labels) dos inputs */
+/* Estilização dos rótulos dos inputs */
 label {
     font-weight: bold;
     display: block;
@@ -69,7 +71,7 @@ label {
     color: var(--label-color);
 }
 
-/* Estilos aplicados aos campos de seleção e de entrada de texto */
+/* Estilos para os campos de input e seleção */
 select, input {
     margin-top: 5px;
     margin-bottom: 10px;
@@ -81,7 +83,7 @@ select, input {
     box-sizing: border-box;
 }
 
-/* Estilos aplicados ao grupo de atividades */
+/* Estilização do grupo de atividades */
 .activity-group {
     border: 1px solid var(--input-border);
     padding: 15px;
@@ -95,12 +97,7 @@ select, input {
     position: relative;
 }
 
-/* O input ocupa o máximo de espaço possível */
-.activity-group .input-group {
-    flex-grow: 1;
-}
-
-/* Estilos aplicados ao botão de remover atividade */
+/* Estilização do botão de remover atividade */
 .remove-activity-btn {
     background-color: var(--primary-color);
     border: none;
@@ -119,13 +116,7 @@ select, input {
     background-color: var(--primary-hover);
 }
 
-.remove-activity-btn svg {
-    width: 18px;
-    height: 18px;
-    fill: white;
-}
-
-/* Botão para adicionar nova atividade */
+/* Botão de adicionar nova atividade */
 #addActivityBtn {
     background-color: var(--primary-color);
     border: none;
@@ -145,13 +136,7 @@ select, input {
     background-color: var(--primary-hover);
 }
 
-#addActivityBtn svg {
-    width: 18px;
-    height: 18px;
-    fill: white;
-}
-
-/* Container que exibe a pontuação total */
+/* Container de pontuação total */
 #totalPontuacaoContainer {
     margin-top: 20px;
     text-align: center;
@@ -162,7 +147,7 @@ select, input {
     font-size: 1.5rem;
 }
 
-/* Estilos aplicados aos botões para gerar e carregar JSON */
+/* Estilização dos botões de JSON */
 .json-buttons {
     display: flex;
     justify-content: space-between;
@@ -170,6 +155,7 @@ select, input {
     margin-top: 20px;
 }
 
+/* Estilos dos botões de gerar e carregar JSON */
 #gerarJsonBtn, #carregarJsonBtn {
     background-color: var(--secondary-color);
     color: white;
@@ -186,7 +172,7 @@ select, input {
     background-color: var(--secondary-hover);
 }
 
-/* Estilos aplicados ao botão de salvar JSON */
+/* Botão de salvar JSON */
 #salvarJsonBtn {
     margin-top: 10px;
     background-color: var(--secondary-color);
@@ -204,7 +190,7 @@ select, input {
     background-color: var(--secondary-hover);
 }
 
-/* Exibição do JSON gerado */
+/* Área para exibir o JSON gerado */
 #jsonOutput {
     display: none;
     margin-top: 10px;
@@ -217,7 +203,7 @@ select, input {
     background-color: #fff;
 }
 
-/* Ajustes de responsividade para telas menores */
+/* Ajustes de responsividade para telas pequenas */
 @media screen and (max-width: 600px) {
     .remove-activity-btn, #addActivityBtn {
         width: 30px;
@@ -247,7 +233,7 @@ select, input {
         width: 100%;
     }
 
-    /* Atualização do h1 para melhor responsividade */
+    /* Ajuste do tamanho do título principal para telas menores */
     h1 {
         font-size: 2rem;
     }
