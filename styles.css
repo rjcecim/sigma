@@ -11,11 +11,12 @@
     --input-border: #ddd;
     --button-shadow: rgba(0, 0, 0, 0.1);
     --border-radius: 4px;
+    --header-font: 'Poppins', sans-serif;
 }
 
 /* Estilo básico aplicado ao corpo da página */
 body {
-    font-family: Arial, sans-serif, sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--background-color);
@@ -31,10 +32,33 @@ body {
 
 /* Estilos aplicados ao título principal (h1) */
 h1 {
+    font-family: var(--header-font);
     text-align: center;
     margin-bottom: 20px;
-    color: var(--text-color);
-    font-size: 2rem;
+    color: var(--primary-color);
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--secondary-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
 }
 
 /* Estilos para os rótulos (labels) dos inputs */
@@ -221,5 +245,10 @@ select, input {
 
     #gerarJsonBtn, #carregarJsonBtn {
         width: 100%;
+    }
+
+    /* Atualização do h1 para melhor responsividade */
+    h1 {
+        font-size: 2rem;
     }
 }
