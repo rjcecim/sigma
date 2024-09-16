@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<atividades>
+  <atividade>
+    <nome>Abertura de Chamado (0,50 ponto(s))</nome>
+    <pontuacao>0,50</pontuacao>
+    <descricao>Registrar Chamado no GLPI de Requisições pelos canais de comunicação de TI</descricao>
+    <data-value>2100</data-value>
+  </atividade>
+  <atividade>
+    <nome>Acompanhamento de Publicações no Diário Oficial (0,25 ponto(s))</nome>
+    <pontuacao>0,25</pontuacao>
+    <descricao>Pontuação diária, se ocorrer.</descricao>
+    <data-value>3526</data-value>
+  </atividade>
+  <atividade>
+    <nome>Acompanhar atividades de instalação, manutenção ou configuração realizados por terceiros (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Acompanhamento dos Serviços Prestados pelas Empresas Contratadas pelo TCE-PA: C2A, TC Copiadoras, Torino e PlugNet.</descricao>
+    <data-value>3563</data-value>
+  </atividade>
+  <atividade>
+    <nome>Administração de serviços de TI (0,50 ponto(s))</nome>
+    <pontuacao>0,50</pontuacao>
+    <descricao>Alteração de controle de acesso, realização de configuraçao, upgrade e correlatos.</descricao>
+    <data-value>2069</data-value>
+  </atividade>
+  <atividade>
+    <nome>Anexar/Apensar/Desentranhar Documentos/Expedientes/Processos (0,10 ponto(s))</nome>
+    <pontuacao>0,10</pontuacao>
+    <descricao>Anexar/Apensar Expedientes/Processos/Documentos complementares.</descricao>
+    <data-value>910</data-value>
+  </atividade>
+  <atividade>
+    <nome>Apoio na Realização de Eventos (Sessões Plenárias, Reuniões, Treinamentos, Lives, Fórum) (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Apoio em Eventos Realizados nas Salas de Reunião do TCE-PA, Sala de Treinamento e no Auditório.</descricao>
+    <data-value>2071</data-value>
+  </atividade>
+  <atividade>
+    <nome>Atividades Gerenciais e Administrativas (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Gerenciamento de abonos de faltas, saídas antecipadas, banco de horas de servidores, férias, homologações de atividades no SIGMA, bem como atividades gerais de gerenciamento administrativo. Por hora.</descricao>
+    <data-value>939</data-value>
+  </atividade>
+  <atividade>
+    <nome>Atualização de imagens do sistema operacional (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Atualização de Imagem do Sistemas dos Computadores e Notebooks</descricao>
+    <data-value>2102</data-value>
+  </atividade>
+  <atividade>
+    <nome>Atualização de Indicadores de Governança (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Atualização de Indicadores de Governança</descricao>
+    <data-value>2074</data-value>
+  </atividade>
+  <atividade>
+    <nome>Atuar como fiscal de Contratos, Convênios e Congêneres (10,00 ponto(s))</nome>
+    <pontuacao>10,00</pontuacao>
+    <descricao>Pontuar por mês de atuação como fiscal, e por contrato.</descricao>
+    <data-value>3529</data-value>
+  </atividade>
+  <atividade>
+    <nome>Automação de processos de implantação de soluções de TI (DevOps) (2,00 ponto(s))</nome>
+    <pontuacao>2,00</pontuacao>
+    <descricao>Automação do Build e aplicação e containers, configuração de Integração contínua e deploy automático. Configuração da aplicação no Cluster Kubernetes de homologação ou produção. Configuração de ferramentas para monitoramento do desempenho das aplicações.</descricao>
+    <data-value>2079</data-value>
+  </atividade>
+  <atividade>
+    <nome>Avaliação de Estágio Probatório (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Por servidor.</descricao>
+    <data-value>938</data-value>
+  </atividade>
+  <atividade>
+    <nome>Avaliação de Plano de Gestão de Desempenho - PGDI (2,00 ponto(s))</nome>
+    <pontuacao>2,00</pontuacao>
+    <descricao>Por servidor.</descricao>
+    <data-value>937</data-value>
+  </atividade>
+  <atividade>
+    <nome>Criação de imagens do sistema operacional (5,00 ponto(s))</nome>
+    <pontuacao>5,00</pontuacao>
+    <descricao>Preparação de Imagem do Sistemas dos Computadores e Notebooks</descricao>
+    <data-value>2103</data-value>
+  </atividade>
+  <atividade>
+    <nome>Criar expediente eletrônico (0,30 ponto(s))</nome>
+    <pontuacao>0,30</pontuacao>
+    <descricao>Gerar expediente eletrônico a partir de memorando, ofício, formulário ou qualquer outro ato motivador do expediente, desde que não seja para tratar de assunto de interesse particular. Necessário cadastrar o interessado e assinar e/ou solicitar a assinatura.</descricao>
+    <data-value>3145</data-value>
+  </atividade>
+  <atividade>
+    <nome>Desenvolvimento de aplicações relacionadas a análise de dados (5,00 ponto(s))</nome>
+    <pontuacao>5,00</pontuacao>
+    <descricao>Execução de processos de ETL, Cruzamento de dados, extração automática de dados, Construção de Painéis ou Dashboards, etc.</descricao>
+    <data-value>2078</data-value>
+  </atividade>
+  <atividade>
+    <nome>Desenvolvimento de soluções de TI na área de ciência de dados (2,00 ponto(s))</nome>
+    <pontuacao>2,00</pontuacao>
+    <descricao>Comunicar previsões e resultados para a gestão e os departamentos de TI através de visualizações de dados eficazes e criação de painéis gerenciais; Extrair grandes volumes de dados de múltiplas fontes internas e externas;</descricao>
+    <data-value>2080</data-value>
+  </atividade>
+  <atividade>
+    <nome>Design e modelagem de banco de dados (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Representa as atividades de dados dentro do ciclo de desenvolvimento de sistemas, tais como: avaliações em modelos de dados existentes, análise de requisitos de dados, projeto de banco de dados, implantação e manutenção dos bancos de dados.</descricao>
+    <data-value>2077</data-value>
+  </atividade>
+  <atividade>
+    <nome>Despacho - Nível 1 (0,50 ponto(s))</nome>
+    <pontuacao>0,50</pontuacao>
+    <descricao>Elaboração baseada em modelo.</descricao>
+    <data-value>906</data-value>
+  </atividade>
+  <atividade>
+    <nome>Despacho - Nível 2 (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Elaboração mediante consultas a dados e sistemas, legislação, etc.</descricao>
+    <data-value>907</data-value>
+  </atividade>
+  <atividade>
+    <nome>Digitalização de documentos (0,20 ponto(s))</nome>
+    <pontuacao>0,20</pontuacao>
+    <descricao>Por expediente/processo.</descricao>
+    <data-value>912</data-value>
+  </atividade>
+  <atividade>
+    <nome>Documentar solução de problemas (base de conhecimento) (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Registrar os procedimentos necessários para solução de problemas identificados</descricao>
+    <data-value>2065</data-value>
+  </atividade>
+  <atividade>
+    <nome>Elaboração de artes/design (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Elaboração de artes/design</descricao>
+    <data-value>2075</data-value>
+  </atividade>
+  <atividade>
+    <nome>Elaboração de documentação e outros materiais de suporte (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Elaboração de todo tipo de material pertinentes ao projeto, tanto material técnico, bem como material de apoio ao usuário, como: criação de slides, vídeos, imagens, entre outros materiais.</descricao>
+    <data-value>2076</data-value>
+  </atividade>
+  <atividade>
+    <nome>Elaboração de Informações/manifestações técnicas (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Por hora.</descricao>
+    <data-value>943</data-value>
+  </atividade>
+  <atividade>
+    <nome>Elaboração de parecer técnico em apoio a atividades de outras unidades (5,00 ponto(s))</nome>
+    <pontuacao>5,00</pontuacao>
+    <descricao>Realizar a análise documental e produzir parecer de acordo com o solicitado pelas unidades do Tribunal</descricao>
+    <data-value>2067</data-value>
+  </atividade>
+  <atividade>
+    <nome>Elaboração de Plano de Gestão de Desempenho - PGDI (3,00 ponto(s))</nome>
+    <pontuacao>3,00</pontuacao>
+    <descricao>Por servidor.</descricao>
+    <data-value>936</data-value>
+  </atividade>
+  <atividade>
+    <nome>Elaboração de Planos Institucionais/Plano de Gestão/Estratégico/MMD/PLS/PPA (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Levantamento das Atividades e ações a serem contempladas no Plano. Elaboração do Plano de Gestão. Por hora.</descricao>
+    <data-value>3535</data-value>
+  </atividade>
+  <atividade>
+    <nome>Elaboração de planos, políticas, normas ou orientações técnicas (Por designação e durante o expediente). (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Análise e elaboração de planos, políticas ou normas. Por hora.</descricao>
+    <data-value>920</data-value>
+  </atividade>
+  <atividade>
+    <nome>Elaboração de Termo de Referência/Estudo Preliminar - Nível 3 (40,00 ponto(s))</nome>
+    <pontuacao>40,00</pontuacao>
+    <descricao>Elaboração de Termo de Referência com nível de complexidade alto - Engenharia e Informática.</descricao>
+    <data-value>929</data-value>
+  </atividade>
+  <atividade>
+    <nome>Elaboração de Termo de Referência/Estudo Técnico Preliminar - Nivel 1 (5,00 ponto(s))</nome>
+    <pontuacao>5,00</pontuacao>
+    <descricao>Elaboração de Termo de Referência com nível de complexidade baixo (contratações diretas, adesões a atas de registro de preços, etc)</descricao>
+    <data-value>3520</data-value>
+  </atividade>
+  <atividade>
+    <nome>Elaboração de Termo de Referência/Estudo Técnico Preliminar - Nivel 2 (20,00 ponto(s))</nome>
+    <pontuacao>20,00</pontuacao>
+    <descricao>Elaboração de Termo de Referência com nível de complexidade médio.</descricao>
+    <data-value>3521</data-value>
+  </atividade>
+  <atividade>
+    <nome>Elaborar estudos e pesquisas (Por designação e durante o expediente). (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Por hora.</descricao>
+    <data-value>917</data-value>
+  </atividade>
+  <atividade>
+    <nome>Elaborar projeto referente a procedimentos operacionais padrão, manualizações ou fluxogramas na sua área de atuação. (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Formalizado no e-TCE e submetido ao gestor da unidade organizacional. Pontuação por hora.</descricao>
+    <data-value>3446</data-value>
+  </atividade>
+  <atividade>
+    <nome>Elaborar Relatório Trimestral/Anual (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Reunir e compilar informações qualitativas e quantitativas das atividades relativas ao período, no âmbito da Secretaria e Coordenadorias. Por hora.</descricao>
+    <data-value>924</data-value>
+  </atividade>
+  <atividade>
+    <nome>Encaminhar e arquivar Documentos/Expedientes/Processos Físicos (0,50 ponto(s))</nome>
+    <pontuacao>0,50</pontuacao>
+    <descricao>Arquivar em pasta própria documentos em meio físico, acompanhando a tempestividade da tramitação até a sua conclusão.</descricao>
+    <data-value>911</data-value>
+  </atividade>
+  <atividade>
+    <nome>Instalação e configuração Serviços ou Aplicativos de TI (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Instalação de configurações de soluções de TI</descricao>
+    <data-value>2068</data-value>
+  </atividade>
+  <atividade>
+    <nome>Inventário de Hardware e Software (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Realizar Levantamento de Equipamentos</descricao>
+    <data-value>2073</data-value>
+  </atividade>
+  <atividade>
+    <nome>Investigação de problemas complexos em soluções de TI (2,00 ponto(s))</nome>
+    <pontuacao>2,00</pontuacao>
+    <descricao>Investigação de solução de problemas não documentados</descricao>
+    <data-value>2070</data-value>
+  </atividade>
+  <atividade>
+    <nome>Manutenção Corretiva de Equipamentos (Hardware e Software) (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Manutenção de Equipamentos em Bancada na Sala de Manutenção do CAU.</descricao>
+    <data-value>2104</data-value>
+  </atividade>
+  <atividade>
+    <nome>Manutenção de ativos no GLPI (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Manutenção de equipamentos de informática no GLPI.</descricao>
+    <data-value>3569</data-value>
+  </atividade>
+  <atividade>
+    <nome>Manutenção Preventiva de Equipamentos (Hardware e Software) (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Implementação de procedimentos planejados e sistemáticos para a revisão, controle e monitoramento de equipamentos.</descricao>
+    <data-value>2105</data-value>
+  </atividade>
+  <atividade>
+    <nome>Mapear procedimentos ou processos de trabalho (10,00 ponto(s))</nome>
+    <pontuacao>10,00</pontuacao>
+    <descricao>Mapear as atividades necessárias a execução de determinada tarefa relacionada a rotina de trabalho</descricao>
+    <data-value>2066</data-value>
+  </atividade>
+  <atividade>
+    <nome>Memorando/Ofício - Nível 1 (0,50 ponto(s))</nome>
+    <pontuacao>0,50</pontuacao>
+    <descricao>Elaboração baseada em modelo.</descricao>
+    <data-value>904</data-value>
+  </atividade>
+  <atividade>
+    <nome>Memorando/Ofício - Nível 2 (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Elaboração mediante consultas a dados e sistemas, legislação, etc.</descricao>
+    <data-value>905</data-value>
+  </atividade>
+  <atividade>
+    <nome>Participação em eventos técnicos (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Pontuação por hora</descricao>
+    <data-value>3556</data-value>
+  </atividade>
+  <atividade>
+    <nome>Participação em reuniões (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Pontuação por hora e por designação da chefia.</descricao>
+    <data-value>3555</data-value>
+  </atividade>
+  <atividade>
+    <nome>Participar da ambientação, orientação e instrução de servidores, assessores e estagiários do Tribunal (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Por hora, até o limite de 10 horas mensais e 30 horas trimestrais. Limite de 30,00 pts. por ciclo avaliativo.</descricao>
+    <data-value>3503</data-value>
+  </atividade>
+  <atividade>
+    <nome>Participar da implantação/migração soluções e serviços de TI (10,00 ponto(s))</nome>
+    <pontuacao>10,00</pontuacao>
+    <descricao>Acompanhar a implantação de solução de serviços de TI. Poderá ser registrado mais de uma vez dada a complexidade da implantação</descricao>
+    <data-value>2063</data-value>
+  </atividade>
+  <atividade>
+    <nome>Participar das atividades da Comissão de Recebimentos de Bens de TI (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Participar das atividades da Comissão de Recebimentos de Bens de TI</descricao>
+    <data-value>2072</data-value>
+  </atividade>
+  <atividade>
+    <nome>Participar de ações da Coord. de Saúde e Qualidade de Vida, Cerimonial, etc., comprovadas por folha de frequência. (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Participação previamente autorizada pela chefia e que ocorra durante o expediente. Pontuação por hora.</descricao>
+    <data-value>3445</data-value>
+  </atividade>
+  <atividade>
+    <nome>Participar de ações da ECAV, comprovadas por folha de frequência. (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Participação previamente autorizada pela chefia e que ocorra durante o expediente. Pontuação por hora, com limitação de 45h trimestrais. Limite de 45,00 pts. por ciclo avaliativo.</descricao>
+    <data-value>3501</data-value>
+  </atividade>
+  <atividade>
+    <nome>Participar em Comissões/Comitês/Grupos de Trabalho e congêneres (10,00 ponto(s))</nome>
+    <pontuacao>10,00</pontuacao>
+    <descricao>Assumir responsabilidades adicionais, por meio de cada designação por Portaria, desde que não remunerado. Pontuação única, por designação.</descricao>
+    <data-value>922</data-value>
+  </atividade>
+  <atividade>
+    <nome>Prestar atendimento presencial, por telefone ou por meio eletrônico - Nível 1 (0,50 ponto(s))</nome>
+    <pontuacao>0,50</pontuacao>
+    <descricao>Atendimentos registrados no GLPI no período de XX/XX/2024 a XX/XX/2024.</descricao>
+    <data-value>913</data-value>
+  </atividade>
+  <atividade>
+    <nome>Prestar atendimento presencial, por telefone ou por meio eletrônico - Nível 2 (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Atendimentos registrados no GLPI no período de XX/XX/2024 a XX/XX/2024.</descricao>
+    <data-value>914</data-value>
+  </atividade>
+  <atividade>
+    <nome>Realização de pesquisa visando a obtenção de preço médio de soluções e serviços de TI (2,00 ponto(s))</nome>
+    <pontuacao>2,00</pontuacao>
+    <descricao>Levantamento de preço junto as empresas fornecedoras de soluções e serviços de TI</descricao>
+    <data-value>2064</data-value>
+  </atividade>
+  <atividade>
+    <nome>Realização de POC (Prova de Conceito) de soluções e serviços de TI (20,00 ponto(s))</nome>
+    <pontuacao>20,00</pontuacao>
+    <descricao>Teste e avaliação de soluções de serviços de TI candidatos a contratação/implantação</descricao>
+    <data-value>2061</data-value>
+  </atividade>
+  <atividade>
+    <nome>Realizar visita técnica (natureza administrativa) (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Visita ao TCE/PA (sede ou unidade regional), órgãos públicos e outras Instituições. Previamente autorizada pela chefia e que tenha relação direta com sua área de atuação no Tribunal. Pontuação por hora.</descricao>
+    <data-value>916</data-value>
+  </atividade>
+  <atividade>
+    <nome>Requisitar material pelo sistema (0,50 ponto(s))</nome>
+    <pontuacao>0,50</pontuacao>
+    <descricao>Por pedido realizado.</descricao>
+    <data-value>931</data-value>
+  </atividade>
+  <atividade>
+    <nome>Resposta a demanda da Ouvidoria e outros - Nível 1 (5,00 ponto(s))</nome>
+    <pontuacao>5,00</pontuacao>
+    <descricao>Grau de complexidade 1.</descricao>
+    <data-value>940</data-value>
+  </atividade>
+  <atividade>
+    <nome>Revisar e ajustar a elaboração do Termo de Referência (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Por hora.</descricao>
+    <data-value>930</data-value>
+  </atividade>
+  <atividade>
+    <nome>Serviço de copa (0,20 ponto(s))</nome>
+    <pontuacao>0,20</pontuacao>
+    <descricao>Servir café e água a visitantes</descricao>
+    <data-value>3536</data-value>
+  </atividade>
+  <atividade>
+    <nome>Serviço de copa - higienização de utensílios (0,20 ponto(s))</nome>
+    <pontuacao>0,20</pontuacao>
+    <descricao>Manter limpos os copos e louças (por hora).</descricao>
+    <data-value>3534</data-value>
+  </atividade>
+  <atividade>
+    <nome>SISPLAN - Atualizar os registros (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Cadastrar ou modificar dados no sistema, dentre outras atribuições. Por hora.</descricao>
+    <data-value>926</data-value>
+  </atividade>
+  <atividade>
+    <nome>Ter projeto de boa prática aprovado, em sua área de atuação no Tribunal (10,00 ponto(s))</nome>
+    <pontuacao>10,00</pontuacao>
+    <descricao>Por iniciativa própria, formalizar projeto no e-TCE, desde que tenha relação direta com sua área de atuação no Tribunal. Lançar no SIGMA no momento da aprovação pelo Secretário/Gestor da respectiva unidade organizacional.</descricao>
+    <data-value>3533</data-value>
+  </atividade>
+  <atividade>
+    <nome>Teste de Equipamentos (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Teste de novos equipamentos adquiridos ou que vieram de manutenção por empresa terceirizada ou da garantia. Pontuação por equipamento.</descricao>
+    <data-value>3570</data-value>
+  </atividade>
+  <atividade>
+    <nome>Treinamento na condição de facilitador - apresentação (dentro do horário do expediente e não remunerado). (2,00 ponto(s))</nome>
+    <pontuacao>2,00</pontuacao>
+    <descricao>Treinamento na condição de instrutor/professor - pontuação por cada hora de curso ministrado.</descricao>
+    <data-value>3447</data-value>
+  </atividade>
+  <atividade>
+    <nome>Triagem, distribuição e controle de expedientes/processos (1,00 ponto(s))</nome>
+    <pontuacao>1,00</pontuacao>
+    <descricao>Por hora, até o limite de 20 horas mensais e 60 trimestrais. Limite de 60,00 pts. por ciclo avaliativo.</descricao>
+    <data-value>3502</data-value>
+  </atividade>
+</atividades>

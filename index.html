@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Definição do tipo de documento e idioma da página -->
+    <meta charset="UTF-8">
+    <!-- Configuração da página para ser responsiva, ajustando para a largura do dispositivo -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título da página -->
+    <title>Atividades Dropdown</title>
+    <!-- Link para o arquivo de estilo CSS externo -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="container">
+        <!-- Título principal da página -->
+        <h1>Seleção de Atividades</h1>
+
+        <!-- Container que irá abrigar as atividades dinâmicas -->
+        <section id="activitiesContainer">
+            <!-- Removido o grupo de atividade inicial para evitar duplicação -->
+        </section>
+
+        <!-- Botão para adicionar uma nova atividade -->
+        <button id="addActivityBtn" aria-label="Adicionar Atividade">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+            </svg>
+        </button>
+
+        <!-- Exibição da produtividade total -->
+        <section id="totalPontuacaoContainer">
+            <h2>Produtividade: <span id="totalPontuacao">0,00</span></h2>
+        </section>
+
+        <!-- Botões para gerar e carregar JSON -->
+        <div class="json-buttons">
+            <button id="gerarJsonBtn">Gerar JSON das Atividades</button>
+            <button id="carregarJsonBtn">Carregar JSON das Atividades</button>
+        </div>
+
+        <!-- Campo onde o JSON será exibido -->
+        <pre id="jsonOutput" aria-live="polite"></pre>
+
+        <!-- Botão para salvar o JSON em um arquivo -->
+        <button id="salvarJsonBtn" style="display: none;">Salvar Arquivo JSON</button>
+
+        <!-- Campo de input oculto para carregar arquivos -->
+        <input type="file" id="fileInput" accept=".json" style="display: none;" />
+
+        <!-- Script que contém as funcionalidades da página -->
+        <script src="script.js" defer></script>
+    </main>
+</body>
+</html>

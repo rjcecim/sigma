@@ -1,0 +1,225 @@
+/* Variáveis de Cores */
+:root {
+    --background-color: #f4f4f9;
+    --container-max-width: 1200px;
+    --primary-color: #008CBA;
+    --primary-hover: #007B9E;
+    --secondary-color: #4CAF50;
+    --secondary-hover: #45a049;
+    --text-color: #333;
+    --label-color: #555;
+    --input-border: #ddd;
+    --button-shadow: rgba(0, 0, 0, 0.1);
+    --border-radius: 4px;
+}
+
+/* Estilo básico aplicado ao corpo da página */
+body {
+    font-family: Arial, sans-serif, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+}
+
+/* Definição do container principal da página */
+.container {
+    width: 90%;
+    max-width: var(--container-max-width);
+    margin: 20px auto;
+    padding: 10px;
+}
+
+/* Estilos aplicados ao título principal (h1) */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    font-size: 2rem;
+}
+
+/* Estilos para os rótulos (labels) dos inputs */
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    color: var(--label-color);
+}
+
+/* Estilos aplicados aos campos de seleção e de entrada de texto */
+select, input {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid var(--input-border);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+}
+
+/* Estilos aplicados ao grupo de atividades */
+.activity-group {
+    border: 1px solid var(--input-border);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    position: relative;
+}
+
+/* O input ocupa o máximo de espaço possível */
+.activity-group .input-group {
+    flex-grow: 1;
+}
+
+/* Estilos aplicados ao botão de remover atividade */
+.remove-activity-btn {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px var(--button-shadow);
+    transition: background-color 0.3s ease;
+}
+
+.remove-activity-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.remove-activity-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: white;
+}
+
+/* Botão para adicionar nova atividade */
+#addActivityBtn {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px var(--button-shadow);
+    transition: background-color 0.3s ease;
+}
+
+#addActivityBtn:hover {
+    background-color: var(--primary-hover);
+}
+
+#addActivityBtn svg {
+    width: 18px;
+    height: 18px;
+    fill: white;
+}
+
+/* Container que exibe a pontuação total */
+#totalPontuacaoContainer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#totalPontuacaoContainer h2 {
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+/* Estilos aplicados aos botões para gerar e carregar JSON */
+.json-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#gerarJsonBtn, #carregarJsonBtn {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 10px;
+    font-size: 1rem;
+    flex: 1;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#gerarJsonBtn:hover, #carregarJsonBtn:hover {
+    background-color: var(--secondary-hover);
+}
+
+/* Estilos aplicados ao botão de salvar JSON */
+#salvarJsonBtn {
+    margin-top: 10px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#salvarJsonBtn:hover {
+    background-color: var(--secondary-hover);
+}
+
+/* Exibição do JSON gerado */
+#jsonOutput {
+    display: none;
+    margin-top: 10px;
+    border: 1px solid var(--input-border);
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: var(--border-radius);
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    background-color: #fff;
+}
+
+/* Ajustes de responsividade para telas menores */
+@media screen and (max-width: 600px) {
+    .remove-activity-btn, #addActivityBtn {
+        width: 30px;
+        height: 30px;
+    }
+
+    .remove-activity-btn svg, #addActivityBtn svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    #gerarJsonBtn, #carregarJsonBtn, #salvarJsonBtn {
+        font-size: 0.875rem;
+        padding: 8px;
+    }
+
+    .activity-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .json-buttons {
+        flex-direction: column;
+    }
+
+    #gerarJsonBtn, #carregarJsonBtn {
+        width: 100%;
+    }
+}
