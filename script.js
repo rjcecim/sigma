@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Verificar se o usuário está deletando
         if (currentValue.length < previousValue.length) {
-            // Usuário está deletando, não formatar imediatamente
             campo.dataset.previousValue = currentValue;
             return;
         }
