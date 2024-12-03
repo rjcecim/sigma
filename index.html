@@ -1,58 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <!-- Declaração do tipo de documento e definição do idioma da página -->
     <meta charset="UTF-8">
-    <!-- Configuração para responsividade, ajustando o layout para a largura da tela do dispositivo -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Título que será exibido na aba do navegador -->
-    <title>Atividades Dropdown</title>
-    <!-- Inclusão do arquivo de estilos externo (CSS) -->
+    <title>Gerenciador de Atividades</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- CSS Personalizado -->
     <link rel="stylesheet" href="styles.css">
-    <!-- Importação da fonte 'Poppins' do Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Container principal que envolve todo o conteúdo da página -->
-    <main class="container">
-        <!-- Título principal da página -->
-        <h1>Seleção de Atividades</h1>
-
-        <!-- Seção onde as atividades serão adicionadas dinamicamente via JavaScript -->
-        <section id="activitiesContainer">
-            <!-- O conteúdo será inserido dinamicamente pelo JavaScript -->
-        </section>
-
-        <!-- Botão para adicionar uma nova atividade -->
-        <button id="addActivityBtn" aria-label="Adicionar Atividade">
-            <!-- Ícone SVG representando o botão de adição -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-            </svg>
-        </button>
-
-        <!-- Seção que exibe a pontuação total de produtividade -->
-        <section id="totalPontuacaoContainer">
-            <h2>Produtividade: <span id="totalPontuacao">0,0</span></h2>
-        </section>
-
-        <!-- Botões para gerar e carregar dados no formato JSON -->
-        <div class="json-buttons">
-            <button id="gerarJsonBtn">Gerar JSON das Atividades</button>
-            <button id="carregarJsonBtn">Carregar JSON das Atividades</button>
+    <div class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3">Gerenciador de Atividades</h1>
+            <div>
+                <button id="addActivityBtn" class="btn btn-primary me-2">
+                    <i class="bi bi-plus-lg me-1"></i>Adicionar Atividade
+                </button>
+                <button id="resetBtn" class="btn btn-outline-secondary me-2">
+                    <i class="bi bi-arrow-counterclockwise me-1"></i>Resetar
+                </button>
+                <button id="toggleDarkModeBtn" class="btn btn-outline-secondary">
+                    <i class="bi bi-moon-fill me-1"></i>Modo Escuro
+                </button>
+            </div>
         </div>
 
-        <!-- Área onde o JSON gerado será exibido -->
-        <pre id="jsonOutput" aria-live="polite"></pre>
+        <div id="activitiesContainer"></div>
 
-        <!-- Botão para salvar o arquivo JSON -->
-        <button id="salvarJsonBtn" style="display: none;">Salvar Arquivo JSON</button>
+        <div class="mt-4">
+            <h5>Total de Pontuação: <span id="totalPontuacao">0,0</span></h5>
+        </div>
 
-        <!-- Input oculto para carregar arquivos JSON -->
-        <input type="file" id="fileInput" accept=".json" style="display: none;" />
+        <div class="mt-3">
+            <button id="gerarJsonBtn" class="btn btn-success me-2">
+                <i class="bi bi-file-earmark-code-fill me-1"></i>Gerar JSON
+            </button>
+            <button id="carregarJsonBtn" class="btn btn-info me-2">
+                <i class="bi bi-upload me-1"></i>Carregar JSON
+            </button>
+            <input type="file" id="fileInput" accept=".json" style="display: none;">
+            <button id="salvarJsonBtn" class="btn btn-primary" style="display: none;">
+                <i class="bi bi-download me-1"></i>Salvar JSON
+            </button>
+        </div>
 
-        <!-- Inclusão do arquivo JavaScript responsável pela lógica da página -->
-        <script src="script.js" defer></script>
-    </main>
+        <div class="mt-4">
+            <pre id="jsonOutput" class="p-3" style="max-height: 300px; overflow-y: auto;"></pre>
+        </div>
+    </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="toastNotification" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    JSON salvo com sucesso!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Seu script.js -->
+    <script src="script.js"></script>
 </body>
 </html>

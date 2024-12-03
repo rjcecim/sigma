@@ -1,262 +1,275 @@
+// script.js
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Elementos do DOM relacionados a atividades e JSON
-    const activitiesContainer = document.getElementById('activitiesContainer');
     const addActivityBtn = document.getElementById('addActivityBtn');
+    const activitiesContainer = document.getElementById('activitiesContainer');
+    const totalPontuacao = document.getElementById('totalPontuacao');
     const gerarJsonBtn = document.getElementById('gerarJsonBtn');
     const carregarJsonBtn = document.getElementById('carregarJsonBtn');
-    const salvarJsonBtn = document.getElementById('salvarJsonBtn');
     const jsonOutput = document.getElementById('jsonOutput');
+    const salvarJsonBtn = document.getElementById('salvarJsonBtn');
     const fileInput = document.getElementById('fileInput');
-    const totalPontuacaoEl = document.getElementById('totalPontuacao');
+    const toggleDarkModeBtn = document.getElementById('toggleDarkModeBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    let atividades = [];
+    let atividadesData = [];
 
-    let atividadesData = []; // Dados de atividades carregados do XML
-    let resultadoJSON = {}; // Armazenamento temporário do JSON gerado
+    const toastNotification = new bootstrap.Toast(document.getElementById('toastNotification'));
 
-    // Formatação de números usando Intl
-    const formatNumber = new Intl.NumberFormat('pt-BR', {
-        minimumFractionDigits: 1,
-        maximumFractionDigits: 1,
-    });
-
-    // Carregar atividades do XML e armazenar em atividadesData
-    async function carregarAtividadesXML() {
-        try {
-            const response = await fetch('atividades.xml');
-            if (!response.ok) throw new Error('Falha ao carregar atividades.');
-            const text = await response.text();
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(text, "application/xml");
-            const atividades = xmlDoc.getElementsByTagName('atividade');
-
-            // Mapeamento dos dados do XML para o array atividadesData
-            atividadesData = Array.from(atividades).map(atividade => ({
-                nome: atividade.querySelector('nome').textContent,
-                dataValue: atividade.querySelector('data-value').textContent,
-                pontuacao: parseFloat(atividade.querySelector('pontuacao').textContent.replace(',', '.')),
-                descricao: atividade.querySelector('descricao').textContent
-            }));
-        } catch (error) {
-            console.error(error);
-            alert('Erro ao carregar atividades. Verifique o console para mais detalhes.');
-        }
-    }
-
-    // Função para formatar entrada numérica no campo de pontuação
-    function formatarEntradaNumerica(campo) {
-        const previousValue = campo.dataset.previousValue || '';
-        const currentValue = campo.value;
-
-        // Verificar se o usuário está deletando
-        if (currentValue.length < previousValue.length) {
-            campo.dataset.previousValue = currentValue;
-            return;
-        }
-
-        // Remover todos os caracteres que não são dígitos
-        let valorNumerico = parseFloat(currentValue.replace(/\D/g, '')) || 0;
-
-        // Dividir por 10 para obter uma casa decimal
-        let valorFormatado = (valorNumerico / 10).toFixed(1).replace('.', ',');
-
-        campo.value = valorFormatado;
-        campo.dataset.previousValue = valorFormatado;
-
-        // Atualizar a pontuação total após formatação
-        atualizarPontuacaoTotal();
-    }
-
-    // Adicionar nova atividade dinamicamente
-    function adicionarNovaAtividade(selectedActivityValue = null, pontuacaoRealizada = '') {
-        const activityGroup = document.createElement('div');
-        activityGroup.classList.add('activity-group');
-
-        // Criar Input Group (Grupo de Inputs)
-        const inputGroup = document.createElement('div');
-        inputGroup.classList.add('input-group');
-
-        // Label e Select para Atividade
-        const labelAtividade = document.createElement('label');
-        const uniqueIdAtividade = `atividadeDropdown-${Date.now()}`;
-        labelAtividade.setAttribute('for', uniqueIdAtividade);
-        labelAtividade.textContent = 'Selecione uma atividade:';
-
-        const selectAtividade = document.createElement('select');
-        selectAtividade.classList.add('atividadeDropdown');
-        selectAtividade.setAttribute('id', uniqueIdAtividade);
-        selectAtividade.setAttribute('aria-label', 'Selecione uma atividade');
-
-        // Preencher opções no select com as atividades disponíveis
-        atividadesData.forEach(atividade => {
-            const option = document.createElement('option');
-            option.value = atividade.dataValue;
-            option.textContent = `${atividade.nome} (${formatNumber.format(atividade.pontuacao)} ponto(s))`;
-            selectAtividade.appendChild(option);
+    const atualizarPontuacao = () => {
+        let total = 0;
+        atividades.forEach(atividade => {
+            total += atividade.pontuacaoTotal || 0;
         });
+        totalPontuacao.textContent = total.toFixed(1).replace('.', ',');
+    };
 
-        // Selecionar valor inicial, se fornecido
-        if (selectedActivityValue) {
-            selectAtividade.value = selectedActivityValue;
-        }
+    const adicionarNovaAtividade = () => {
+        const atividade = {
+            id: Date.now(),
+            nome: '',
+            quantidade: null,
+            pontuacaoBase: 0,
+            pontuacaoTotal: 0,
+            descricao: '',
+            'data-value': ''
+        };
+        atividades.push(atividade);
+        renderizarAtividades();
+    };
 
-        // Label e Input para Pontuação
-        const labelPontuacao = document.createElement('label');
-        const uniqueIdPontuacao = `pontuacaoRealizada-${Date.now()}`;
-        labelPontuacao.setAttribute('for', uniqueIdPontuacao);
-        labelPontuacao.textContent = 'Insira a pontuação que você realizou:';
+    const removerAtividade = (id) => {
+        atividades = atividades.filter(atividade => atividade.id !== id);
+        renderizarAtividades();
+    };
 
-        const inputPontuacao = document.createElement('input');
-        inputPontuacao.type = 'text';
-        inputPontuacao.classList.add('pontuacaoRealizada');
-        inputPontuacao.setAttribute('id', uniqueIdPontuacao);
-        inputPontuacao.placeholder = 'Digite a pontuação realizada';
-        inputPontuacao.value = pontuacaoRealizada;
-        inputPontuacao.setAttribute('data-previous-value', pontuacaoRealizada);
-        inputPontuacao.addEventListener('input', (e) => formatarEntradaNumerica(e.target));
+    const renderizarAtividades = () => {
+        activitiesContainer.innerHTML = '';
+        atividades.forEach(atividade => {
+            const atividadeDiv = document.createElement('div');
+            atividadeDiv.classList.add('atividade', 'd-flex', 'flex-column', 'shadow-sm');
+            atividadeDiv.setAttribute('data-id', atividade.id);
 
-        // Inserir elementos no inputGroup
-        inputGroup.appendChild(labelAtividade);
-        inputGroup.appendChild(selectAtividade);
-        inputGroup.appendChild(labelPontuacao);
-        inputGroup.appendChild(inputPontuacao);
-
-        // Botão de Remover Atividade
-        const buttonGroup = document.createElement('div');
-        buttonGroup.classList.add('button-group');
-
-        const removeBtn = document.createElement('button');
-        removeBtn.classList.add('remove-activity-btn');
-        removeBtn.setAttribute('aria-label', 'Remover Atividade');
-        removeBtn.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M3 6h18v2H3V6zm2 3h14v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V9zm3 0v11h2V9H8zm4 0v11h2V9h-2zm4 0v11h2V9h-2zm1-6V1h-8v2H3v2h18V3h-4z"/>
-            </svg>
-        `;
-        removeBtn.addEventListener('click', () => {
-            activityGroup.remove();
-            atualizarPontuacaoTotal();
-        });
-
-        buttonGroup.appendChild(removeBtn);
-
-        // Inserir inputGroup e buttonGroup no activityGroup
-        activityGroup.appendChild(inputGroup);
-        activityGroup.appendChild(buttonGroup);
-
-        // Inserir activityGroup no activitiesContainer
-        activitiesContainer.appendChild(activityGroup);
-
-        // Atualizar pontuação total
-        atualizarPontuacaoTotal();
-    }
-
-    // Atualizar pontuação total de produtividade
-    function atualizarPontuacaoTotal() {
-        const activityGroups = document.querySelectorAll('.activity-group');
-        let totalPontuacao = 0;
-
-        activityGroups.forEach(group => {
-            const select = group.querySelector('.atividadeDropdown');
-            const input = group.querySelector('.pontuacaoRealizada');
-            const pontuacaoRealizada = parseFloat(input.value.replace(',', '.')) || 0;
-
-            const atividade = atividadesData.find(a => a.dataValue === select.value);
-            if (atividade) {
-                totalPontuacao += pontuacaoRealizada * atividade.pontuacao;
-            }
-        });
-
-        totalPontuacaoEl.textContent = formatNumber.format(totalPontuacao);
-    }
-
-    // Gerar JSON com as atividades e pontuações realizadas
-    function gerarJSON() {
-        const activityGroups = document.querySelectorAll('.activity-group');
-        const atividadesArray = [];
-
-        for (const group of activityGroups) {
-            const select = group.querySelector('.atividadeDropdown');
-            const input = group.querySelector('.pontuacaoRealizada');
-            const pontuacaoRealizada = input.value.trim();
-
-            if (!pontuacaoRealizada) {
-                alert('Por favor, insira a pontuação realizada em todas as atividades.');
-                input.focus();
-                return;
-            }
-
-            const pontuacaoNumerica = parseFloat(pontuacaoRealizada.replace(',', '.'));
-            if (isNaN(pontuacaoNumerica)) {
-                alert('Por favor, insira uma pontuação válida.');
-                input.focus();
-                return;
-            }
-
-            const atividade = atividadesData.find(a => a.dataValue === select.value);
-            if (atividade) {
-                atividadesArray.push({
-                    nome: atividade.nome,
-                    pontuacao: formatNumber.format(pontuacaoNumerica),
-                    descricao: atividade.descricao,
-                    "data-value": atividade.dataValue
-                });
-            }
-        }
-
-        // Exibir o JSON gerado na página
-        resultadoJSON = { atividades: atividadesArray };
-        jsonOutput.style.display = 'block';
-        jsonOutput.textContent = JSON.stringify(resultadoJSON, null, 4);
-        salvarJsonBtn.style.display = 'block';
-    }
-
-    // Salvar JSON como arquivo
-    function salvarArquivoJSON() {
-        const blob = new Blob([JSON.stringify(resultadoJSON, null, 4)], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = "atividades.json";
-        a.click();
-        URL.revokeObjectURL(url);
-    }
-
-    // Carregar JSON do arquivo
-    function carregarArquivoJSON(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                try {
-                    const json = JSON.parse(e.target.result);
-                    if (!json.atividades) throw new Error('Formato JSON inválido.');
-
-                    activitiesContainer.innerHTML = ''; // Limpa o container
-                    json.atividades.forEach(atividade => {
-                        adicionarNovaAtividade(atividade["data-value"], atividade.pontuacao);
-                    });
-
-                    atualizarPontuacaoTotal();
-                } catch (error) {
-                    console.error(error);
-                    alert('Erro ao carregar JSON. Verifique o formato do arquivo.');
+            const select = document.createElement('select');
+            select.classList.add('form-select');
+            select.setAttribute('aria-label', 'Seleção de Atividade');
+            select.innerHTML = `
+                <option value="" disabled ${atividade.nome === '' ? 'selected' : ''}>Selecione uma atividade</option>
+            `;
+            atividadesData.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.nome;
+                option.textContent = item.nome;
+                if (item.nome === atividade.nome) {
+                    option.selected = true;
                 }
-            };
-            reader.readAsText(file);
+                select.appendChild(option);
+            });
+            select.required = true;
+            select.addEventListener('change', (e) => {
+                atividade.nome = e.target.value;
+                const atividadeSelecionada = atividadesData.find(item => item.nome === e.target.value);
+                if (atividadeSelecionada) {
+                    const pontuacaoBaseStr = atividadeSelecionada.pontuacao.replace(',', '.');
+                    const pontuacaoBaseFloat = parseFloat(pontuacaoBaseStr);
+                    atividade.pontuacaoBase = pontuacaoBaseFloat;
+                    atividade.descricao = atividadeSelecionada.descricao;
+                    atividade['data-value'] = atividadeSelecionada['data-value'];
+                    if (atividade.quantidade === null || isNaN(atividade.quantidade)) {
+                        atividade.quantidade = null;
+                        atividade.pontuacaoTotal = 0;
+                    } else {
+                        atividade.pontuacaoTotal = atividade.pontuacaoBase * atividade.quantidade;
+                    }
+                    inputPontuacaoTotal.value = atividade.pontuacaoTotal > 0 ? atividade.pontuacaoTotal.toFixed(1).replace('.', ',') : '';
+                    inputDescricao.value = atividade.descricao;
+                } else {
+                    atividade.pontuacaoBase = 0;
+                    atividade.descricao = '';
+                    atividade['data-value'] = '';
+                    atividade.quantidade = null;
+                    atividade.pontuacaoTotal = 0;
+                    inputPontuacaoTotal.value = '';
+                    inputDescricao.value = '';
+                }
+                atualizarPontuacao();
+            });
+
+            atividadeDiv.appendChild(select);
+
+            const rowDiv = document.createElement('div');
+            rowDiv.classList.add('row', 'g-3');
+
+            const colPontuacao = document.createElement('div');
+            colPontuacao.classList.add('col-md-6');
+
+            const inputPontuacao = document.createElement('input');
+            inputPontuacao.type = 'number';
+            inputPontuacao.classList.add('form-control');
+            inputPontuacao.placeholder = 'Pontuação';
+            inputPontuacao.value = atividade.quantidade !== null ? atividade.quantidade : '';
+            inputPontuacao.addEventListener('input', (e) => {
+                const pontuacao = parseFloat(e.target.value.replace(',', '.'));
+                atividade.quantidade = isNaN(pontuacao) || pontuacao < 0 ? 0 : pontuacao;
+                atividade.pontuacaoTotal = atividade.pontuacaoBase * atividade.quantidade;
+                inputPontuacaoTotal.value = atividade.pontuacaoTotal > 0 ? atividade.pontuacaoTotal.toFixed(1).replace('.', ',') : '';
+                atualizarPontuacao();
+            });
+
+            colPontuacao.appendChild(inputPontuacao);
+            rowDiv.appendChild(colPontuacao);
+
+            const colPontuacaoTotal = document.createElement('div');
+            colPontuacaoTotal.classList.add('col-md-6');
+
+            const inputPontuacaoTotal = document.createElement('input');
+            inputPontuacaoTotal.type = 'text';
+            inputPontuacaoTotal.classList.add('form-control');
+            inputPontuacaoTotal.placeholder = 'Pontuação Total';
+            inputPontuacaoTotal.readOnly = true;
+            inputPontuacaoTotal.value = atividade.pontuacaoTotal > 0 ? atividade.pontuacaoTotal.toFixed(1).replace('.', ',') : '';
+
+            colPontuacaoTotal.appendChild(inputPontuacaoTotal);
+            rowDiv.appendChild(colPontuacaoTotal);
+
+            atividadeDiv.appendChild(rowDiv);
+
+            const inputDescricao = document.createElement('textarea');
+            inputDescricao.classList.add('form-control');
+            inputDescricao.placeholder = 'Descrição';
+            inputDescricao.value = atividade.descricao;
+            inputDescricao.rows = 3;
+            inputDescricao.addEventListener('input', (e) => {
+                atividade.descricao = e.target.value;
+            });
+
+            atividadeDiv.appendChild(inputDescricao);
+
+            const removeBtn = document.createElement('button');
+            removeBtn.classList.add('removeActivityBtn', 'btn', 'btn-danger', 'mt-2');
+            removeBtn.setAttribute('aria-label', 'Remover atividade');
+            removeBtn.innerHTML = `<i class="bi bi-trash me-2" aria-hidden="true"></i> Remover`;
+            removeBtn.addEventListener('click', () => removerAtividade(atividade.id));
+
+            atividadeDiv.appendChild(removeBtn);
+
+            activitiesContainer.appendChild(atividadeDiv);
+        });
+        atualizarPontuacao();
+    };
+
+    const gerarJSON = () => {
+        const jsonData = JSON.stringify({
+            atividades: atividades.map(atividade => ({
+                nome: atividade.nome,
+                pontuacao: atividade.quantidade,
+                descricao: atividade.descricao,
+                'data-value': atividade['data-value']
+            }))
+        }, null, 4);
+        jsonOutput.textContent = jsonData;
+        salvarJsonBtn.style.display = 'inline-block';
+    };
+
+    const salvarJSON = () => {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(jsonOutput.textContent);
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", "atividades.json");
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+        toastNotification.show();
+    };
+
+    const carregarJSON = (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const loadedData = JSON.parse(e.target.result);
+                if (loadedData.atividades && Array.isArray(loadedData.atividades)) {
+                    const novasAtividades = loadedData.atividades.map(item => {
+                        const atividadeSelecionada = atividadesData.find(data => data.nome === item.nome);
+                        const pontuacaoBase = atividadeSelecionada ? parseFloat(atividadeSelecionada.pontuacao.replace(',', '.')) : 0;
+                        const quantidade = item.pontuacao ? parseFloat(item.pontuacao) : 0;
+                        const pontuacaoTotal = pontuacaoBase * quantidade;
+
+                        return {
+                            id: Date.now() + Math.random(),
+                            nome: item.nome || '',
+                            pontuacaoBase: pontuacaoBase,
+                            quantidade: quantidade,
+                            pontuacaoTotal: pontuacaoTotal,
+                            descricao: item.descricao || '',
+                            'data-value': item['data-value'] || ''
+                        };
+                    });
+                    atividades = atividades.concat(novasAtividades);
+                    renderizarAtividades();
+                } else {
+                    throw new Error("Formato inválido");
+                }
+            } catch (error) {
+                alert("Erro ao carregar o JSON. Verifique o formato do arquivo.");
+            }
+        };
+        reader.readAsText(file);
+    };
+
+    const toggleDarkMode = () => {
+        document.body.classList.toggle('dark-mode');
+        if (document.body.classList.contains('dark-mode')) {
+            toggleDarkModeBtn.innerHTML = `<i class="bi bi-sun-fill me-2" aria-hidden="true"></i> Modo Claro`;
+        } else {
+            toggleDarkModeBtn.innerHTML = `<i class="bi bi-moon-fill me-2" aria-hidden="true"></i> Modo Escuro`;
         }
-    }
+    };
 
-    // Inicializar funções e carregar atividades
-    async function init() {
-        await carregarAtividadesXML();
-        adicionarNovaAtividade(); // Adiciona o primeiro grupo de atividade
+    const resetAtividades = () => {
+        atividades = [];
+        renderizarAtividades();
+        jsonOutput.textContent = '';
+        salvarJsonBtn.style.display = 'none';
+    };
 
-        // Eventos de interação do usuário
-        addActivityBtn.addEventListener('click', () => adicionarNovaAtividade());
-        gerarJsonBtn.addEventListener('click', gerarJSON);
-        salvarJsonBtn.addEventListener('click', salvarArquivoJSON);
-        carregarJsonBtn.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', carregarArquivoJSON);
-    }
+    const carregarAtividadesXML = () => {
+        fetch('atividades.xml')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro ao carregar o XML: ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(data, "application/xml");
+                const atividadesXML = xmlDoc.getElementsByTagName('atividade');
+                atividadesData = [];
+                for (let i = 0; i < atividadesXML.length; i++) {
+                    const atividade = atividadesXML[i];
+                    const nome = atividade.getElementsByTagName('nome')[0]?.textContent || '';
+                    const pontuacao = atividade.getElementsByTagName('pontuacao')[0]?.textContent || '0,00';
+                    const descricao = atividade.getElementsByTagName('descricao')[0]?.textContent || '';
+                    const dataValue = atividade.getElementsByTagName('data-value')[0]?.textContent || '';
+                    atividadesData.push({ nome, pontuacao, descricao, 'data-value': dataValue });
+                }
+                renderizarAtividades();
+            })
+            .catch(error => {
+                console.error(error);
+                alert("Não foi possível carregar as atividades do XML.");
+            });
+    };
 
-    init(); // Chamada inicial para iniciar a aplicação
+    addActivityBtn.addEventListener('click', adicionarNovaAtividade);
+    gerarJsonBtn.addEventListener('click', gerarJSON);
+    salvarJsonBtn.addEventListener('click', salvarJSON);
+    carregarJsonBtn.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', carregarJSON);
+    toggleDarkModeBtn.addEventListener('click', toggleDarkMode);
+    resetBtn.addEventListener('click', resetAtividades);
+
+    carregarAtividadesXML();
 });
