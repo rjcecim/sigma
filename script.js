@@ -1,5 +1,3 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const addActivityBtn = document.getElementById('addActivityBtn');
     const activitiesContainer = document.getElementById('activitiesContainer');
@@ -21,7 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
         atividades.forEach(atividade => {
             total += atividade.pontuacaoTotal || 0;
         });
-        totalPontuacao.textContent = total.toFixed(1).replace('.', ',');
+        // Agora formata com duas casas decimais
+        totalPontuacao.textContent = total.toFixed(2).replace('.', ',');
     };
 
     const adicionarNovaAtividade = () => {
@@ -50,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             atividadeDiv.classList.add('atividade', 'd-flex', 'flex-column', 'shadow-sm');
             atividadeDiv.setAttribute('data-id', atividade.id);
 
+            // Cria o select para escolher a atividade
             const select = document.createElement('select');
             select.classList.add('form-select');
             select.setAttribute('aria-label', 'Seleção de Atividade');
@@ -67,8 +67,27 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             select.required = true;
             select.addEventListener('change', (e) => {
-                atividade.nome = e.target.value;
-                const atividadeSelecionada = atividadesData.find(item => item.nome === e.target.value);
+                const selectedValue = e.target.value;
+                // Verifica se já existe outra atividade com o mesmo nome
+                if (atividades.some(a => a.id !== atividade.id && a.nome === selectedValue)) {
+                    let errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                    errorModal.show();
+                    // Reverte a seleção
+                    atividade.nome = '';
+                    e.target.value = '';
+                    atividade.pontuacaoBase = 0;
+                    atividade.descricao = '';
+                    atividade['data-value'] = '';
+                    const inputPontuacaoTotal = atividadeDiv.querySelector('input[placeholder="Pontuação Total"]');
+                    if (inputPontuacaoTotal) inputPontuacaoTotal.value = '';
+                    atualizarPontuacao();
+                    return;
+                }
+
+                atividade.nome = selectedValue;
+                const atividadeSelecionada = atividadesData.find(item => item.nome === selectedValue);
+                const inputPontuacaoTotal = atividadeDiv.querySelector('input[placeholder="Pontuação Total"]');
+                const inputDescricao = atividadeDiv.querySelector('textarea');
                 if (atividadeSelecionada) {
                     const pontuacaoBaseStr = atividadeSelecionada.pontuacao.replace(',', '.');
                     const pontuacaoBaseFloat = parseFloat(pontuacaoBaseStr);
@@ -81,38 +100,47 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else {
                         atividade.pontuacaoTotal = atividade.pontuacaoBase * atividade.quantidade;
                     }
-                    inputPontuacaoTotal.value = atividade.pontuacaoTotal > 0 ? atividade.pontuacaoTotal.toFixed(1).replace('.', ',') : '';
-                    inputDescricao.value = atividade.descricao;
+                    if (inputPontuacaoTotal)
+                        inputPontuacaoTotal.value = atividade.pontuacaoTotal > 0 ? atividade.pontuacaoTotal.toFixed(2).replace('.', ',') : '';
+                    if (inputDescricao)
+                        inputDescricao.value = atividade.descricao;
                 } else {
                     atividade.pontuacaoBase = 0;
                     atividade.descricao = '';
                     atividade['data-value'] = '';
                     atividade.quantidade = null;
-                    atividade.pontuacaoTotal = 0;
-                    inputPontuacaoTotal.value = '';
-                    inputDescricao.value = '';
+                    if (inputPontuacaoTotal)
+                        inputPontuacaoTotal.value = '';
+                    if (inputDescricao)
+                        inputDescricao.value = '';
                 }
                 atualizarPontuacao();
             });
 
             atividadeDiv.appendChild(select);
 
+            // Linha com os inputs de Pontuação e Pontuação Total
             const rowDiv = document.createElement('div');
             rowDiv.classList.add('row', 'g-3');
 
             const colPontuacao = document.createElement('div');
             colPontuacao.classList.add('col-md-6');
 
+            // Usando type="text" para permitir a vírgula como separador decimal
             const inputPontuacao = document.createElement('input');
-            inputPontuacao.type = 'number';
+            inputPontuacao.type = 'text';
             inputPontuacao.classList.add('form-control');
             inputPontuacao.placeholder = 'Pontuação';
-            inputPontuacao.value = atividade.quantidade !== null ? atividade.quantidade : '';
+            inputPontuacao.value = atividade.quantidade !== null ? atividade.quantidade.toString().replace('.', ',') : '';
             inputPontuacao.addEventListener('input', (e) => {
-                const pontuacao = parseFloat(e.target.value.replace(',', '.'));
+                // Permite vírgula como separador decimal
+                const valorFormatado = e.target.value.replace(',', '.');
+                const pontuacao = parseFloat(valorFormatado);
                 atividade.quantidade = isNaN(pontuacao) || pontuacao < 0 ? 0 : pontuacao;
                 atividade.pontuacaoTotal = atividade.pontuacaoBase * atividade.quantidade;
-                inputPontuacaoTotal.value = atividade.pontuacaoTotal > 0 ? atividade.pontuacaoTotal.toFixed(1).replace('.', ',') : '';
+                const inputPontuacaoTotal = atividadeDiv.querySelector('input[placeholder="Pontuação Total"]');
+                if (inputPontuacaoTotal)
+                    inputPontuacaoTotal.value = atividade.pontuacaoTotal > 0 ? atividade.pontuacaoTotal.toFixed(2).replace('.', ',') : '';
                 atualizarPontuacao();
             });
 
@@ -127,13 +155,14 @@ document.addEventListener('DOMContentLoaded', () => {
             inputPontuacaoTotal.classList.add('form-control');
             inputPontuacaoTotal.placeholder = 'Pontuação Total';
             inputPontuacaoTotal.readOnly = true;
-            inputPontuacaoTotal.value = atividade.pontuacaoTotal > 0 ? atividade.pontuacaoTotal.toFixed(1).replace('.', ',') : '';
+            inputPontuacaoTotal.value = atividade.pontuacaoTotal > 0 ? atividade.pontuacaoTotal.toFixed(2).replace('.', ',') : '';
 
             colPontuacaoTotal.appendChild(inputPontuacaoTotal);
             rowDiv.appendChild(colPontuacaoTotal);
 
             atividadeDiv.appendChild(rowDiv);
 
+            // Textarea para a descrição
             const inputDescricao = document.createElement('textarea');
             inputDescricao.classList.add('form-control');
             inputDescricao.placeholder = 'Descrição';
@@ -145,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             atividadeDiv.appendChild(inputDescricao);
 
+            // Botão para remover a atividade
             const removeBtn = document.createElement('button');
             removeBtn.classList.add('removeActivityBtn', 'btn', 'btn-danger', 'mt-2');
             removeBtn.setAttribute('aria-label', 'Remover atividade');
@@ -158,11 +188,14 @@ document.addEventListener('DOMContentLoaded', () => {
         atualizarPontuacao();
     };
 
+    // Gera o JSON, formatando a pontuação com vírgula e duas casas decimais
     const gerarJSON = () => {
         const jsonData = JSON.stringify({
             atividades: atividades.map(atividade => ({
                 nome: atividade.nome,
-                pontuacao: atividade.quantidade,
+                pontuacao: (typeof atividade.quantidade === 'number')
+                    ? atividade.quantidade.toFixed(2).replace('.', ',')
+                    : atividade.quantidade,
                 descricao: atividade.descricao,
                 'data-value': atividade['data-value']
             }))
@@ -193,7 +226,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const novasAtividades = loadedData.atividades.map(item => {
                         const atividadeSelecionada = atividadesData.find(data => data.nome === item.nome);
                         const pontuacaoBase = atividadeSelecionada ? parseFloat(atividadeSelecionada.pontuacao.replace(',', '.')) : 0;
-                        const quantidade = item.pontuacao ? parseFloat(item.pontuacao) : 0;
+                        // Converte a pontuação do JSON (com vírgula) para número
+                        const quantidade = item.pontuacao ? parseFloat(item.pontuacao.replace(',', '.')) : 0;
                         const pontuacaoTotal = pontuacaoBase * quantidade;
 
                         return {

@@ -37,7 +37,7 @@
         <div id="activitiesContainer"></div>
 
         <div class="mt-4">
-            <h5>Total de Pontuação: <span id="totalPontuacao">0,0</span></h5>
+            <h5>Total de Pontuação: <span id="totalPontuacao">0,00</span></h5>
         </div>
 
         <div class="mt-3">
@@ -58,6 +58,7 @@
         </div>
     </div>
 
+    <!-- Toast de Notificação -->
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
         <div id="toastNotification" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
@@ -67,6 +68,24 @@
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Fechar"></button>
             </div>
         </div>
+    </div>
+
+    <!-- Modal de Erro para Atividades Duplicadas -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="errorModalLabel">Erro</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body">
+            Você não pode escolher duas atividades iguais.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Bootstrap JS -->
